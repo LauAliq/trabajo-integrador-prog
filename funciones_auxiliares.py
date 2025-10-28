@@ -1,4 +1,5 @@
 import unicodedata
+from collections import Counter
 
 # Funciones de validación
 
@@ -48,25 +49,70 @@ def submenu_ordenar():
     print("(3) 🏝️        Por superficie      🏝️")
     print("(0) 🔙           Atrás           🔙")
 
+def submenu_ordenar_por_opcion(subeleccion, lista_nombres_paises, paises):
+    if subeleccion == "1":
+        lista_nombres_paises.sort()
+        for i in lista_nombres_paises:
+            print(i)
+
+    elif subeleccion == "2":
+        submenu_ordenar_por_asc_o_desc()
+        subseleccion1 = input("> ")
+
+        poblacion_paises = [(pais, int(datos[0])) for pais, datos in paises.items() if datos[0].isdigit()]
+            
+        while subseleccion1 not in ["2", "1", "0"]:
+            subseleccion1 = input("Por favor, ingrese una elección válida (0, 1, 2): ")
+            
+        if subseleccion1 == "1" :
+            paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1])
+            for nombre, poblacion in paises_por_poblacion: 
+                    print(f"{nombre}: {poblacion:,} habitantes")
+
+        if subseleccion1 == "2" :
+                paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1], reverse = True)
+                for nombre, poblacion in paises_por_poblacion: 
+                    print(f"{nombre}: {poblacion:,} habitantes")
+        else:
+                print("Volviendo al menú principal...")
+            
+    elif subeleccion == "3":
+            submenu_ordenar_por_asc_o_desc()
+            subseleccion2 = input("> ")
+
+            superficie_paises = [(pais, int(datos[1])) for pais, datos in paises.items() if datos[1].isdigit()]
+
+            while subseleccion2 not in ["2", "1", "0"]:
+                subseleccion2 = input("Por favor, ingrese una elección válida (0, 1, 2): ")
+
+            if subseleccion2 == "1" :
+                paises_por_poblacion = sorted(superficie_paises, key=lambda x: x[1])
+                for nombre, superficie in paises_por_poblacion:
+                    print(f"{nombre}: {superficie:,} km²")
+
+            elif subseleccion2 == "2" :
+                paises_por_poblacion = sorted(superficie_paises, key=lambda x: x[1], reverse = True)
+                for nombre, superficie in paises_por_poblacion:
+                    print(f"{nombre}: {superficie:,} km²")
+
+
 def submenu_ordenar_por_asc_o_desc():
     print("\n¿De qué forma?")
     print("(1) ⬆️         Ascendente         ⬆️")
     print("(2) ⬇️         Descendente        ⬇️")
     print("(0) 🔙           Atrás           🔙")
 
-from collections import Counter
-
 def submenu_estadisticas():
     print("\n¿Qué estadística desea mostrar? ")
-    print("(1) 📊 País con mayor y menor población")
-    print("(2) 📊 Promedio de población y superficie")
-    print("(3) 📊 Cantidad de países por continente")
-    print("(0) 🔙           Atrás           🔙")
+    print("(1) 📊  País con mayor y menor población  📊")
+    print("(2) 📊 Promedio de población y superficie 📊")
+    print("(3) 📊 Cantidad de países por continente  📊")
+    print("(0) 🔙                Atrás               🔙")
 
 def estadisticas_por_opcion(opcion, paises):
-    poblaciones = [(pais, int(datos[0])) for pais, datos in paises.items() if datos[0].isdigit()]
-    superficies = [(pais, int(datos[1])) for pais, datos in paises.items() if datos[1].isdigit()]
-    continentes = [datos[2].lower() for datos in paises.values()]
+    poblaciones = [(pais, int(datos[0])) for pais, datos in paises.items()]
+    superficies = [(pais, int(datos[1])) for pais, datos in paises.items()]
+    continentes = [datos[2] for datos in paises.values()]
     
     if opcion == "1":
         if poblaciones:
@@ -79,10 +125,10 @@ def estadisticas_por_opcion(opcion, paises):
             
     elif opcion == "2":
         if poblaciones and superficies:
-            promedio_poblacion = sum(p[1] for p in poblaciones) / len(poblaciones)
+            promedio_poblacion = sum(p[1] for p in poblaciones) // len(poblaciones)
             promedio_superficie = sum(s[1] for s in superficies) / len(superficies)
-            print(f"Promedio de población: {promedio_poblacion:,.0f} habitantes")
-            print(f"Promedio de superficie: {promedio_superficie:,.0f} km²")
+            print(f"Promedio de población: {promedio_poblacion:,} habitantes")
+            print(f"Promedio de superficie: {promedio_superficie:,.1f} km²")
         else:
             print("No hay datos suficientes para calcular promedios.")
     
@@ -90,7 +136,7 @@ def estadisticas_por_opcion(opcion, paises):
         conteo_continentes = Counter(continentes)
         print("Cantidad de países por continente:")
         for continente, cantidad in conteo_continentes.items():
-            print(f"{continente.capitalize()}: {cantidad}")
+            print(f"{continente}: {cantidad}")
 
 
 def buscar_pais(nombre, diccionario):
@@ -139,5 +185,3 @@ def por_superficie(min, max, diccionario):
         print(f"Esta es la lista de países que tienen una superficie menor a {max} km² y mayor a {min} km²:")
         for elemento in lista:
             print(elemento)
-
-

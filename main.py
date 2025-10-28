@@ -75,56 +75,11 @@ while eleccion != "0":
         
         while subeleccion not in ["3", "2", "1", "0"]:
             subeleccion = input("Por favor, ingrese una elección válida (0, 1, 2, 3): ")
-
-        if subeleccion == "1":
-            lista_nombres_paises.sorted()
-            for i in lista_nombres_paises:
-                print(i)
-
-        elif subeleccion == "2":
-            funciones_auxiliares.submenu_ordenar_por_asc_o_desc()
-            subseleccion1 = input("> ")
-
-            poblacion_paises = [(pais, int(datos[0])) for pais, datos in paises.items() if datos[0].isdigit()]
-            
-            while subseleccion1 not in ["2", "1", "0"]:
-                subseleccion1 = input("Por favor, ingrese una elección válida (0, 1, 2): ")
-            
-            if subseleccion1 == "1" :
-                paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1])
-                for nombre, poblacion in paises_por_poblacion: 
-                    print(f"{nombre}: {poblacion:,} habitantes")
-
-            if subseleccion1 == "2" :
-                paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1], reverse = True)
-                for nombre, poblacion in paises_por_poblacion: 
-                    print(f"{nombre}: {poblacion:,} habitantes")
-            else:
-                print("Volviendo al menú principal...")
-            
-        elif subeleccion == "3":
-            funciones_auxiliares.submenu_ordenar_por_asc_o_desc()
-            subseleccion2 = input("> ")
-
-            superficie_paises = [(pais, int(datos[1])) for pais, datos in paises.items() if datos[1].isdigit()]
-
-            while subseleccion2 not in ["2", "1", "0"]:
-                subseleccion2 = input("Por favor, ingrese una elección válida (0, 1, 2): ")
-
-            if subseleccion2 == "1" :
-                paises_por_poblacion = sorted(superficie_paises, key=lambda x: x[1])
-                for nombre, superficie in paises_por_poblacion:
-                    print(f"{nombre}: {superficie:,} km²")
-
-            elif subseleccion2 == "2" :
-                paises_por_poblacion = sorted(superficie_paises, key=lambda x: x[1], reverse = True)
-                for nombre, superficie in paises_por_poblacion:
-                    print(f"{nombre}: {superficie:,} km²")
-            else:
-                print("Volviendo al menú principal...")
-
+        if subeleccion != "0":
+            funciones_auxiliares.submenu_ordenar_por_opcion(subeleccion, lista_nombres_paises, paises)
         else:
             print("Volviendo al menú principal...")
+        
 
     elif eleccion == "4":
         funciones_auxiliares.submenu_estadisticas()
@@ -133,8 +88,11 @@ while eleccion != "0":
             subseleccion3 = input("Por favor, ingrese una elección válida (0,1,2,3): ")
         if subseleccion3 != "0":
             funciones_auxiliares.estadisticas_por_opcion(subseleccion3, paises)
+        else:
+            print("Volviendo al menú principal...")
 
     elif eleccion == "0":
         print("Gracias por utilizar este servicio. Hasta pronto!")
-
+    
+    print("--------------------------------------------------------------------")
 
