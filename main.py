@@ -125,15 +125,16 @@ while eleccion != "0":
 
         else:
             print("Volviendo al menú principal...")
-                
 
     elif eleccion == "4":
-        pass
+        funciones_auxiliares.submenu_estadisticas()
+        subseleccion3 = input("> ")
+        while subseleccion3 not in ["1","2","3","0"]:
+            subseleccion3 = input("Por favor, ingrese una elección válida (0,1,2,3): ")
+        if subseleccion3 != "0":
+            funciones_auxiliares.estadisticas_por_opcion(subseleccion3, paises)
 
     elif eleccion == "0":
         print("Gracias por utilizar este servicio. Hasta pronto!")
-
-    else:
-        pass
 
 
