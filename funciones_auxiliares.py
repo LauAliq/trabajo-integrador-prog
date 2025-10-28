@@ -27,7 +27,7 @@ def normalizar(texto):
 
 def imprimir_menu():
     print("Estas son las opciones que ofrece el menú. Seleccione una por favor: ")
-    print("(1) 🔍 Buscar un país por nombre 🔍") #50
+    print("(1) 🔍 Buscar un país por nombre 🔍") 
     print("(2) ⚙️       Filtrar países       ⚙️")
     print("(3) 📈      Ordenar países       📈")
     print("(4) 📊     Ver estadísticas      📊")
@@ -41,8 +41,18 @@ def submenu_filtrar():
     print("(3) 🏝️   Por rango de superficie  🏝️")
     print("(0) 🔙           Atrás           🔙")
 
-#def submenu_ordenar():
+def submenu_ordenar():
+    print("¿Como quiere ordenar los países?")
+    print("(1) 🅰️         Por nombre        🅱️")
+    print("(2) 👤       Por población       👤")
+    print("(3) 🏝️        Por superficie      🏝️")
+    print("(0) 🔙           Atrás           🔙")
 
+def submenu_ordenar_por_asc_o_desc():
+    print("¿De qué forma?")
+    print("(1) ⬆️         Ascendente         ⬆️")
+    print("(2) ⬇️         Descendente        ⬇️")
+    print("(0) 🔙           Atrás           🔙")
 
 #def submenu_estadisticas()
 
