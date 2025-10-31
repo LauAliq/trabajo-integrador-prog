@@ -25,15 +25,29 @@ def es_float(texto):
 # Funciones generales
 
 def normalizar(texto):
+    """
+        Esta función se encarga de normalizar el texto para formatear todas las entradas
+    
+    """
     texto_normalizado = unicodedata.normalize('NFD', texto)
     texto_sin_tildes = "".join([c for c in texto_normalizado if unicodedata.category(c) != 'Mn'])
     return texto_sin_tildes.strip().lower()
 
 def limpiar_consola():
+    """
+        Esta función se encarga de limpiar el contenido de la consola para ver la interfaz
+        más limpia y que sea más clara la visualización de la información
+
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 
 def mostrar_lista_paginada(t, lista, elementos_por_pagina=15):
+    """
+        Esta funcion se encarga de dividir en distintas páginas la forma en la que se muestran 
+        las listas de paises ya que podrían ser bastante extensas en algunos casos.
+        Muestra los resultados en listas que pueden ser de elementos únicos o tuplas.
+    """
     total = len(lista)
     if total == 0:
         print("No hay resultados para mostrar.")
@@ -87,6 +101,12 @@ def mostrar_lista_paginada(t, lista, elementos_por_pagina=15):
 # Definimos funciones principales
 
 def buscar_pais(diccionario):
+    """
+        Esta función pide ingresar el nombre del país, lo valida 
+        y si encuentra una coincidencia dentro del csv lo muestra por pantalla. 
+        En caso de no encontrar coincidencia se le indica al usuario.
+    """
+    
     nombre = input("Ingrese su búsqueda: ")
     while not solo_letras(nombre):
         nombre = input("Por favor, ingrese un nombre válido: ")
@@ -101,6 +121,11 @@ def buscar_pais(diccionario):
         mostrar_lista_paginada("Esta es la lista de países encontrada: ", lista)
 
 def buscar_pais_por_continente(diccionario, continentes):
+    """
+        Esta función permite al usuario ingresar un continente y mostrar todos su paises.
+        Pide el nombre del continente, lo valida y luego mostra si encuentra o no coincidencias
+
+    """
     continente = input("Ingrese el continente por el cuál desea filtrar los países: ")
     while normalizar(continente) not in continentes:
         continente = input("Ingrese un continente válido (Antártida, América del Norte, América del Sur, Asia, África, Oceanía, Europa): ")
@@ -112,6 +137,12 @@ def buscar_pais_por_continente(diccionario, continentes):
     mostrar_lista_paginada(f"Esta es la lista de países de {continente}: ", lista)
 
 def buscar_pais_por_habs(diccionario):
+    """
+        Esta función permite al usuario ingresar un rango de habitantes y mostrar todos los países
+        que cumplan con este rango.
+        Pide los límites, los valida y luego mostra si encuentra o no coincidencias
+        
+    """
     min = input("Ingrese la cota inferior para la cantidad de habitantes: ")
     while not solo_numeros(min):
         min = input("Por favor, ingrese un valor válido: ")
@@ -130,6 +161,12 @@ def buscar_pais_por_habs(diccionario):
         mostrar_lista_paginada(f"Esta es la lista de países que tienen menos de {max} habitantes y más de {min} habitantes:", lista)
 
 def buscar_pais_por_sup(diccionario):
+    """
+        Esta función permite al usuario ingresar un rango de superficie y mostrar todos los países
+        que cumplan con este rango.
+        Pide los límites, los valida y luego mostra si encuentra o no coincidencias
+        
+    """
     min = input("Ingrese la cota inferior para la extensión de superficie en km²: ")
     while not solo_numeros(min):
         min = input("Por favor, ingrese un valor válido: ")
@@ -148,31 +185,61 @@ def buscar_pais_por_sup(diccionario):
         mostrar_lista_paginada(f"Esta es la lista de países que tienen una superficie menor a {max} km² y mayor a {min} km²:",lista)
 
 def ordenar_pais_por_nombre(paises):
+    """
+        Esta función permite al usuario mostrar la lista completa de paises 
+        ordenada de forma alfabética.
+        
+    """
     lista_nombres_paises = list(paises.keys())
     lista_nombres_paises.sort()
     mostrar_lista_paginada("Países ordenados por nombre", lista_nombres_paises)
 
 def ordenar_pais_por_poblacion(paises):
+    """
+        Esta función permite al usuario mostrar la lista completa de paises 
+        ordenada por población de forma ascendente.
+        
+    """
     poblacion_paises = [(pais, int(datos[0])) for pais, datos in paises.items()]
     paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1])
     mostrar_lista_paginada("Países ordenados por poblacion", paises_por_poblacion)
 
 def ordenar_pais_por_poblacion_op(paises):
+    """
+        Esta función permite al usuario mostrar la lista completa de paises 
+        ordenada por población de forma descendente.
+        
+    """
     poblacion_paises = [(pais, int(datos[0])) for pais, datos in paises.items()]
     paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1], reverse=True)
     mostrar_lista_paginada("Países ordenados por poblacion", paises_por_poblacion)
 
 def ordenar_pais_por_superficie(paises):
+    """
+        Esta función permite al usuario mostrar la lista completa de paises 
+        ordenada por superficie de forma ascendente.
+        
+    """
     poblacion_paises = [(pais, int(datos[0])) for pais, datos in paises.items()]
     paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1])
     mostrar_lista_paginada("Países ordenados por superficie", paises_por_poblacion)
 
 def ordenar_pais_por_superficie_op(paises):
+    """
+        Esta función permite al usuario mostrar la lista completa de paises 
+        ordenada por superficie de forma descendente.
+        
+    """
     poblacion_paises = [(pais, int(datos[0])) for pais, datos in paises.items()]
     paises_por_poblacion = sorted(poblacion_paises, key=lambda x: x[1], reverse=True)
     mostrar_lista_paginada("Países ordenados por superficie", paises_por_poblacion)
 
 def estadistica_1(paises):
+    """
+        Esta función permite al usuario mostrar el país con mayor y menor 
+        población de todos en la lista.
+        
+    """
     poblaciones = [(pais, int(datos[0])) for pais, datos in paises.items()]
     pais_mayor_pob = max(poblaciones, key=lambda x: x[1])
     pais_menor_pob = min(poblaciones, key=lambda x: x[1])
@@ -181,6 +248,11 @@ def estadistica_1(paises):
     print(f"País con menor población: {pais_menor_pob[0]} ({pais_menor_pob[1]:,} habitantes)")
 
 def estadistica_2(paises):
+    """
+        Esta función permite al usuario mostrar el promedio general de habitantes
+        y el promedio de superficie.
+        
+    """
     superficies = [(pais, int(datos[1])) for pais, datos in paises.items()]
     poblaciones = [(pais, int(datos[0])) for pais, datos in paises.items()]
     promedio_poblacion = sum(p[1] for p in poblaciones) // len(poblaciones)
@@ -190,6 +262,11 @@ def estadistica_2(paises):
     print(f"Promedio de superficie: {promedio_superficie:,.1f} km²")
 
 def estadistica_3(paises):
+    """
+        Esta función permite al usuario mostrar la cantidad de paises que posee
+        cada continente.
+        
+    """
     continentes = [datos[2] for datos in paises.values()]
     conteo_continentes = Counter(continentes)
     limpiar_consola()
