@@ -1,7 +1,16 @@
 import csv
 import unicodedata
+import os
+import funciones_api
 import funciones_auxiliares
 from InquirerPy import inquirer
+
+if not os.path.exists("paises_del_mundo_español.csv"):
+    datos = funciones_api.obtener_datos_paises()
+    if datos:
+        funciones_api.generar_csv(datos)
+else:
+    pass
 
 continentes = ["antartida", "america del sur", "america del norte", "africa", "asia", "oceania", "europa"]
 paises = {}
