@@ -1,7 +1,6 @@
 import csv
 import os
 import unicodedata
-import os
 import funciones_api
 import funciones_auxiliares
 from InquirerPy import inquirer

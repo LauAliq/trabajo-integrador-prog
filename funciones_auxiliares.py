@@ -1,7 +1,6 @@
 import unicodedata
 from collections import Counter
 from InquirerPy import inquirer
-from colorama import Fore
 import os
 
 # Funciones de validación
