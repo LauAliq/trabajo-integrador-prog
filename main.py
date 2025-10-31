@@ -1,4 +1,5 @@
 import csv
+import os
 import unicodedata
 import os
 import funciones_api
@@ -15,8 +16,10 @@ else:
 continentes = ["antartida", "america del sur", "america del norte", "africa", "asia", "oceania", "europa"]
 paises = {}
 
+CSV_NAME_FILE = "paises_del_mundo_español.csv"
+
 # Apertura del archivo .csv
-with open("paises_del_mundo_español.csv", "r", encoding="utf-8") as archivo:
+with open(CSV_NAME_FILE, "r", encoding="utf-8") as archivo:
     for fila in archivo:
         if "Tristán de Acuña" not in fila:
             lista_completa = fila.strip().split(",")
@@ -64,6 +67,7 @@ def menu_asc_desc_2():
         ).execute()
 
     if ad_opciones[sub_seleccion] is None:
+        funciones_auxiliares.limpiar_consola()
         print("Volviendo al menú principal...\n")
     else:
         ad_opciones[sub_seleccion]()
@@ -85,6 +89,7 @@ def menu_filtrar_paises():
         ).execute()
 
         if sub_opciones[sub_seleccion] is None:
+            funciones_auxiliares.limpiar_consola()
             print("Volviendo al menú principal...\n")
             break
         else:
@@ -106,6 +111,7 @@ def menu_ordenar_paises():
         ).execute()
 
         if sub_opciones[sub_seleccion] is None:
+            funciones_auxiliares.limpiar_consola()
             print("Volviendo al menú principal...\n")
             break
         else:
@@ -127,6 +133,7 @@ def menu_estadisticas_paises():
         ).execute()
 
         if sub_opciones[sub_seleccion] is None:
+            funciones_auxiliares.limpiar_consola()
             print("Volviendo al menú principal...\n")
             break
         else:
@@ -149,6 +156,7 @@ while bandera_menu_principal:
     ).execute()
 
     if opciones[seleccion] is None:
+        funciones_auxiliares.limpiar_consola()
         print("Gracias por utilizar nuestro sistema. ¡Hasta luego!")
         bandera_menu_principal = False
     else:
