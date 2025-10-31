@@ -4,7 +4,8 @@ from collections import Counter
 # Funciones de validación
 
 def solo_letras(texto):
-    return (not texto == "") and (texto.isalpha())
+    sin_espacios = texto.replace(" ", "")
+    return (not sin_espacios == "") and (sin_espacios.isalpha())
 
 def solo_numeros(texto):
     return (not texto == "") and (texto.isdigit())

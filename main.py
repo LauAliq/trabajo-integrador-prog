@@ -108,7 +108,7 @@ def menu_estadisticas_paises():
         "📊  País con mayor y menor población  📊" : lambda: funciones_auxiliares.estadistica_1(paises),
         "📊 Promedio de población y superficie 📊" : lambda: funciones_auxiliares.estadistica_2(paises),
         "📊 Cantidad de países por continente  📊" : lambda: funciones_auxiliares.estadistica_3(paises),
-        "🔙           Atrás           🔙" : None
+        "🔙               Atrás                🔙" : None
     }
 
     while True:
